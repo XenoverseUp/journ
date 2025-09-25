@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native"
 import NavigationBar from "@/components/navigation-bar"
 import globalStyles from "@/lib/style/global-styles"
 import Text from "@/components/common/Text"
-import EmotePicker from "@/components/EmotePicker"
+import EmotePicker from "@/components/emote-picker"
 
 export default function App() {
   return (

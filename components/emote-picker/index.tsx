@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native"
+import Preview from "./Preview"
+import Slider from "./Slider"
 
 export default function EmotePicker() {
   return (
     <View style={styles.container}>
-      <View style={styles.view}></View>
-      <View style={styles.slider}></View>
+      <Preview style={styles.view} />
+      <Slider style={styles.slider} />
     </View>
   )
 }
