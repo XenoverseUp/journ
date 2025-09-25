@@ -1,23 +1,20 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import NavigationBar from "@/components/NavigationBar";
-import globalStyles from "@/lib/style/global-styles";
-import Text from "@/components/common/Text";
+import { StyleSheet, View } from "react-native"
+
+import NavigationBar from "@/components/navigation-bar"
+import globalStyles from "@/lib/style/global-styles"
+import Text from "@/components/common/Text"
+import EmotePicker from "@/components/EmotePicker"
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <View style={[globalStyles.background, styles.container]}>
-        <NavigationBar />
-        <View style={styles.textContainer}>
-          <Text style={{ fontFamily: "Caveat_500Medium", fontSize: 32 }}>Hello Journal!</Text>
-        </View>
-
-        <StatusBar style="inverted" />
+    <View style={[globalStyles.background, styles.container]}>
+      <NavigationBar />
+      <EmotePicker />
+      <View style={styles.textContainer}>
+        <Text style={{ fontSize: 18 }}>Hello Journal!</Text>
       </View>
-    </SafeAreaProvider>
-  );
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -32,5 +29,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#212121",
   },
-});
+})

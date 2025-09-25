@@ -1,29 +1,31 @@
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
-import { Caveat_500Medium, useFonts } from "@expo-google-fonts/caveat";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { Stack } from "expo-router"
+import { StatusBar } from "expo-status-bar"
+import "react-native-reanimated"
+import { Caveat_700Bold, useFonts } from "@expo-google-fonts/caveat"
+import * as SplashScreen from "expo-splash-screen"
+import { useEffect } from "react"
+import { ThemeProvider, DarkTheme } from "@react-navigation/native"
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    Caveat_500Medium,
-  });
+    Caveat_700Bold,
+  })
 
   useEffect(() => {
-    if (loaded || error) SplashScreen.hideAsync();
-  }, [loaded, error]);
+    if (loaded || error) SplashScreen.hideAsync()
+  }, [loaded, error])
 
-  if (!loaded && !error) return null;
+  if (!loaded && !error) return null
 
   return (
-    <>
+    <ThemeProvider value={DarkTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(settings)" options={{ title: "Settings", presentation: "modal" }} />
       </Stack>
-      <StatusBar style="auto" />
-    </>
-  );
+      <StatusBar style="inverted" />
+    </ThemeProvider>
+  )
 }
