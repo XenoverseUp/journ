@@ -1,18 +1,15 @@
 import { StyleSheet, View } from "react-native"
-
-import NavigationBar from "@/components/navigation-bar"
 import globalStyles from "@/lib/style/global-styles"
-import Text from "@/components/common/Text"
+
 import EmotePicker from "@/components/emote-picker"
+import Submission from "@/components/submission"
 
 export default function App() {
   return (
     <View style={[globalStyles.background, styles.container]}>
-      <NavigationBar />
-      <EmotePicker />
-      <View style={styles.textContainer}>
-        <Text style={{ fontSize: 18 }}>Hello Journal!</Text>
-      </View>
+      {/*<NavigationBar />*/}
+      <EmotePicker style={styles.emotePicker} />
+      <Submission style={styles.submission} />
     </View>
   )
 }
@@ -24,11 +21,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 
-  textContainer: {
+  emotePicker: {
+    height: "40%",
+  },
+
+  submission: {
     flexGrow: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#212121",
   },
 })

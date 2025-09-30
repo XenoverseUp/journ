@@ -21,9 +21,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DarkTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(settings)" options={{ title: "Settings", presentation: "modal" }} />
+      <Stack initialRouteName="(tabs)">
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Journal" }} />
+        <Stack.Screen name="(settings)" options={{ title: "Settings" }} />
       </Stack>
       <StatusBar style="inverted" />
     </ThemeProvider>
