@@ -1,12 +1,34 @@
-// components/nav-bar.tsx
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, Pressable } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { SymbolView } from "expo-symbols"
+import { Link } from "expo-router"
 import Text from "../common/Text"
-import { TabTrigger } from "expo-router/ui"
-import TabButton from "./tab-button"
+import map from "@/lib/utils/map"
 
-export default function NavigationBar() {
+type Props = {
+  offset: number
+  position: number
+  onChangePage: (page: number) => void
+}
+
+export default function NavigationBar({ offset, position, onChangePage }: Props) {
   const insets = useSafeAreaInsets()
+
+  const todayOpacity = map({
+    value: position === 0 ? 1 - offset : offset,
+    start: 0,
+    end: 1,
+    targetStart: 0.25,
+    targetEnd: 1,
+  })
+
+  const calendarOpacity = map({
+    value: position === 0 ? offset : 1 - offset,
+    start: 0,
+    end: 1,
+    targetStart: 0.25,
+    targetEnd: 1,
+  })
 
   return (
     <View
@@ -18,14 +40,24 @@ export default function NavigationBar() {
         },
       ]}
     >
+      {/* Tabs */}
       <View style={styles.triggerContainer}>
-        <TabTrigger asChild name="index" href="/(tabs)">
-          <TabButton>Today</TabButton>
-        </TabTrigger>
+        <Pressable onPress={() => onChangePage(0)}>
+          <Text style={[styles.trigger, { opacity: todayOpacity }]}>Today</Text>
+        </Pressable>
 
-        <TabTrigger asChild name="month" href="/(tabs)/month">
-          <TabButton>Calendar</TabButton>
-        </TabTrigger>
+        <Pressable onPress={() => onChangePage(1)}>
+          <Text style={[styles.trigger, { opacity: calendarOpacity }]}>Calendar</Text>
+        </Pressable>
+      </View>
+
+      {/* Actions */}
+      <View style={styles.actionContainer}>
+        <Link href="/(settings)/main" asChild>
+          <Pressable>
+            <SymbolView name="gearshape.fill" tintColor="#FCD3D3" />
+          </Pressable>
+        </Link>
       </View>
     </View>
   )
@@ -45,6 +77,10 @@ const styles = StyleSheet.create({
   },
   trigger: {
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: "700",
+  },
+  actionContainer: {
+    flexDirection: "row",
+    gap: 9,
   },
 })

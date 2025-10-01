@@ -1,21 +1,47 @@
-import { Tabs, TabList, TabTrigger, TabSlot } from "expo-router/ui"
-import Text from "@/components/common/Text"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import PagerView, { PagerViewOnPageScrollEvent } from "react-native-pager-view"
+import { useState, useRef } from "react"
 import { View } from "react-native"
 import NavigationBar from "@/components/nav-bar"
+import IndexScreen from "./index"
+import MonthScreen from "./month"
 
 export default function TabLayout() {
-  return (
-    <Tabs>
-      <TabList>
-        <TabTrigger name="index" href="/(tabs)" />
-        <TabTrigger name="month" href="/(tabs)/month" />
-      </TabList>
+  const [selectedPage, setSelectedPage] = useState(0)
+  const [position, setPosition] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const pagerRef = useRef<PagerView>(null)
 
-      <View style={{ flex: 1 }}>
-        <NavigationBar />
-        <TabSlot />
-      </View>
-    </Tabs>
+  const handleChangePage = (nextPage: number) => {
+    pagerRef.current?.setPage(nextPage)
+  }
+
+  const handlePageScroll = (e: PagerViewOnPageScrollEvent) => {
+    const { position, offset } = e.nativeEvent
+    setPosition(position)
+    setOffset(offset)
+  }
+
+  return (
+    <View style={{ flex: 1 }}>
+      <NavigationBar currentPage={selectedPage} position={position} offset={offset} onChangePage={handleChangePage} />
+      <PagerView
+        ref={pagerRef}
+        style={{ flex: 1 }}
+        initialPage={0}
+        onPageSelected={(e) => {
+          setSelectedPage(e.nativeEvent.position)
+          setPosition(e.nativeEvent.position)
+          setOffset(0)
+        }}
+        onPageScroll={handlePageScroll}
+      >
+        <View key="0">
+          <IndexScreen />
+        </View>
+        <View key="1">
+          <MonthScreen />
+        </View>
+      </PagerView>
+    </View>
   )
 }
