@@ -7,7 +7,6 @@ import Submission from "@/components/submission"
 export default function App() {
   return (
     <View style={[globalStyles.background, styles.container]}>
-      {/*<NavigationBar />*/}
       <EmotePicker style={styles.emotePicker} />
       <Submission style={styles.submission} />
     </View>
@@ -22,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   emotePicker: {
-    height: "40%",
+    height: "48%",
   },
 
   submission: {
