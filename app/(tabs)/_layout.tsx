@@ -6,14 +6,11 @@ import IndexScreen from "./index"
 import MonthScreen from "./month"
 
 export default function TabLayout() {
-  const [selectedPage, setSelectedPage] = useState(0)
   const [position, setPosition] = useState(0)
   const [offset, setOffset] = useState(0)
   const pagerRef = useRef<PagerView>(null)
 
-  const handleChangePage = (nextPage: number) => {
-    pagerRef.current?.setPage(nextPage)
-  }
+  const handleChangePage = (nextPage: number) => pagerRef.current?.setPage(nextPage)
 
   const handlePageScroll = (e: PagerViewOnPageScrollEvent) => {
     const { position, offset } = e.nativeEvent
@@ -23,13 +20,12 @@ export default function TabLayout() {
 
   return (
     <View style={{ flex: 1 }}>
-      <NavigationBar currentPage={selectedPage} position={position} offset={offset} onChangePage={handleChangePage} />
+      <NavigationBar position={position} offset={offset} onChangePage={handleChangePage} />
       <PagerView
         ref={pagerRef}
         style={{ flex: 1 }}
         initialPage={0}
         onPageSelected={(e) => {
-          setSelectedPage(e.nativeEvent.position)
           setPosition(e.nativeEvent.position)
           setOffset(0)
         }}

@@ -1,9 +1,6 @@
-import { View, StyleSheet } from "react-native"
+import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native"
 import Preview from "./Preview"
 import Slider from "./Slider"
-
-import { StyleProp, ViewStyle } from "react-native"
-import Text from "../common/Text"
 
 type Props = {
   style?: StyleProp<ViewStyle>
@@ -12,7 +9,7 @@ type Props = {
 export default function EmotePicker({ style }: Props) {
   return (
     <View style={[style, styles.container]}>
-      <Preview style={styles.view} />
+      <Preview style={styles.preview} />
       <Slider style={styles.slider} />
     </View>
   )
@@ -24,13 +21,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "#000",
   },
-  view: {
+  preview: {
     width: "100%",
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   slider: {
     width: "100%",
     height: 48,
     backgroundColor: "#1c1c1c",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })

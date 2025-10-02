@@ -5,7 +5,7 @@ import Text from "@/components/common/Text"
 export default function Month() {
   return (
     <View style={[globalStyles.background, styles.container]}>
-      <Text>Hsello</Text>
+      <Text>Monthly Calendar</Text>
     </View>
   )
 }
@@ -15,5 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })

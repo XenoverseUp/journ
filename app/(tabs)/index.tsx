@@ -28,5 +28,7 @@ const styles = StyleSheet.create({
   submission: {
     flexGrow: 1,
     backgroundColor: "#212121",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })
