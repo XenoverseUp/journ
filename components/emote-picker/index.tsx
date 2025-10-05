@@ -1,5 +1,6 @@
+import React, { useRef, useState } from "react"
 import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native"
-import Preview from "./Preview"
+import Preview, { PreviewRef } from "./Preview"
 import Slider from "./Slider"
 
 type Props = {
@@ -7,10 +8,18 @@ type Props = {
 }
 
 export default function EmotePicker({ style }: Props) {
+  const previewRef = useRef<PreviewRef>(null)
+  const [progress, setProgress] = useState(0)
+
+  const handleSliderChange = (value: number) => {
+    setProgress(value)
+    previewRef.current?.scrollToProgress(value)
+  }
+
   return (
     <View style={[style, styles.container]}>
-      <Preview style={styles.preview} />
-      <Slider style={styles.slider} />
+      <Preview ref={previewRef} style={styles.preview} />
+      <Slider style={styles.slider} value={progress} onValueChange={handleSliderChange} />
     </View>
   )
 }

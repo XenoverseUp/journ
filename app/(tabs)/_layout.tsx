@@ -1,6 +1,7 @@
-import PagerView, { PagerViewOnPageScrollEvent } from "react-native-pager-view"
 import { useState, useRef } from "react"
 import { View } from "react-native"
+import PagerView, { PagerViewOnPageScrollEvent } from "react-native-pager-view"
+
 import NavigationBar from "@/components/nav-bar"
 import IndexScreen from "./index"
 import MonthScreen from "./month"
@@ -10,9 +11,9 @@ export default function TabLayout() {
   const [offset, setOffset] = useState(0)
   const pagerRef = useRef<PagerView>(null)
 
-  const handleChangePage = (nextPage: number) => pagerRef.current?.setPage(nextPage)
+  const handleChangePage = async (nextPage: number) => pagerRef.current?.setPage(nextPage)
 
-  const handlePageScroll = (e: PagerViewOnPageScrollEvent) => {
+  const handlePageScroll = async (e: PagerViewOnPageScrollEvent) => {
     const { position, offset } = e.nativeEvent
     setPosition(position)
     setOffset(offset)
